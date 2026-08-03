@@ -1,0 +1,42 @@
+name: Update formulae
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Check Homebrew
+        run: brew --version
+      - name: Update formula metadata
+        run: ruby scripts/update-formulae.rb
+      - name: Create update pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- Formula; then
+            echo "No formula updates found."
+            exit 0
+          fi
+          branch="automation/update-formulae-$(date -u +%Y%m%d%H%M%S)"
+          git checkout -b "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Formula
+          git commit -m "chore: update formulae"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --title "chore: update formulae" \
+            --body "Automated upstream release update. Please review the version, checksums, and formula tests." \
+            --base main \
+            --head "$branch"

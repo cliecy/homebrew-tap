@@ -1,0 +1,45 @@
+name: Formula checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v5
+      - name: Register this checkout as the tap under test
+        run: brew tap cliecy/tap "$GITHUB_WORKSPACE"
+      - name: Audit and style
+        run: |
+          brew audit --strict --new --online cliecy/tap/proxytop cliecy/tap/cc-switch-ui
+          brew style --formula cliecy/tap/proxytop cliecy/tap/cc-switch-ui
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14
+            arch: arm64
+          - runner: macos-15-intel
+            arch: x86_64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Register this checkout as the tap under test
+        run: brew tap cliecy/tap "$GITHUB_WORKSPACE"
+      - name: Check runner architecture
+        run: test "$(uname -m)" = "${{ matrix.arch }}"
+      - name: Install and test formulae
+        run: |
+          brew install --build-from-source cliecy/tap/proxytop
+          brew test proxytop
+          brew install --build-from-source cliecy/tap/cc-switch-ui
+          brew test cc-switch-ui
