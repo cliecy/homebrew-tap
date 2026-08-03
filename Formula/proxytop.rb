@@ -1,7 +1,6 @@
 class Proxytop < Formula
   desc "macOS proxy, VPN, tunnel, and process traffic inspector"
   homepage "https://github.com/cliecy/proxytop"
-  version "1.1.1"
   license "MIT"
 
   if Hardware::CPU.arm?

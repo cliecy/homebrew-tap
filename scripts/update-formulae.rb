@@ -53,7 +53,6 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
     class Proxytop < Formula
       desc "macOS proxy, VPN, tunnel, and process traffic inspector"
       homepage "https://github.com/cliecy/proxytop"
-      version "#{proxytop_version}"
       license "MIT"
 
       if Hardware::CPU.arm?
@@ -83,7 +82,6 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       desc "Local Web UI for managing Claude Code and Codex CLI connections"
       homepage "https://github.com/cliecy/cc-switch-ui"
       url "#{cc_url}"
-      version "#{cc_version}"
       sha256 "#{cc_sha}"
       license "MIT"
 
