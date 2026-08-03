@@ -50,10 +50,9 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
     class Proxytop < Formula
       desc "macOS proxy, VPN, tunnel, and process traffic inspector"
       homepage "https://github.com/cliecy/proxytop"
-      license "MIT"
-
       url "#{assets.fetch(arm_name)}"
       sha256 "#{arm_sha}"
+      license "MIT"
 
       def install
         artifact = Dir["proxytop-\#{version}-darwin-*"]

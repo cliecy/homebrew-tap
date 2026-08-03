@@ -1,10 +1,9 @@
 class Proxytop < Formula
   desc "macOS proxy, VPN, tunnel, and process traffic inspector"
   homepage "https://github.com/cliecy/proxytop"
-  license "MIT"
-
   url "https://github.com/cliecy/proxytop/releases/download/v1.1.1/proxytop-1.1.1-darwin-arm.tar.gz"
-  sha256 "9d6681f87220eee4c6ac22d0a033d519b460cf4f59aa2d3e7e494c8556cd6e5f"
+  sha256 "10f28fa2768ef2945b40b4c57d385c2014500944dbf1a67db555a9c7f3e91a13"
+  license "MIT"
 
   def install
     artifact = Dir["proxytop-#{version}-darwin-*"]
