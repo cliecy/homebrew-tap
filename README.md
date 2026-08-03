@@ -2,6 +2,8 @@
 
 Personal Homebrew formulae for Cliecy's command-line tools.
 
+The `proxytop` formula targets macOS on Apple Silicon (arm64).
+
 ## Install
 
 Install an individual formula directly:

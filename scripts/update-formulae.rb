@@ -35,12 +35,9 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
   assets = proxytop_release.fetch("assets").to_h { |asset| [asset.fetch("name"), asset.fetch("browser_download_url")] }
 
   arm_name = "proxytop-#{proxytop_version}-darwin-arm.tar.gz"
-  intel_name = "proxytop-#{proxytop_version}-darwin-intel.tar.gz"
   abort "missing #{arm_name} in latest proxytop release" unless assets.key?(arm_name)
-  abort "missing #{intel_name} in latest proxytop release" unless assets.key?(intel_name)
 
   arm_sha = download_sha(assets.fetch(arm_name), directory, arm_name)
-  intel_sha = download_sha(assets.fetch(intel_name), directory, intel_name)
 
   cc_tags = github_json("repos/cliecy/cc-switch-ui/tags?per_page=100")
   cc_tag = cc_tags.filter_map { |entry| entry["name"] }.find { |tag| tag.match?(/\Av\d+\.\d+\.\d+/) }
@@ -55,13 +52,8 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       homepage "https://github.com/cliecy/proxytop"
       license "MIT"
 
-      if Hardware::CPU.arm?
-        url "#{assets.fetch(arm_name)}"
-        sha256 "#{arm_sha}"
-      else
-        url "#{assets.fetch(intel_name)}"
-        sha256 "#{intel_sha}"
-      end
+      url "#{assets.fetch(arm_name)}"
+      sha256 "#{arm_sha}"
 
       def install
         artifact = Dir["proxytop-\#{version}-darwin-*"]
