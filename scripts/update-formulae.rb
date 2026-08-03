@@ -123,6 +123,9 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       end
 
       def install
+        ENV.delete("PYTHONPATH")
+        ENV.delete("PYTHONHOME")
+        ENV["PYTHONNOUSERSITE"] = "1"
         virtualenv_install_with_resources
       end
 
