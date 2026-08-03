@@ -4,6 +4,7 @@ class Proxytop < Formula
   url "https://github.com/cliecy/proxytop/releases/download/v1.1.1/proxytop-1.1.1-darwin-arm.tar.gz"
   sha256 "10f28fa2768ef2945b40b4c57d385c2014500944dbf1a67db555a9c7f3e91a13"
   license "MIT"
+  depends_on arch: :arm64
 
   def install
     artifact = Dir["proxytop-#{version}-darwin-*"]

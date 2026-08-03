@@ -53,6 +53,7 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       url "#{assets.fetch(arm_name)}"
       sha256 "#{arm_sha}"
       license "MIT"
+      depends_on arch: :arm64
 
       def install
         artifact = Dir["proxytop-\#{version}-darwin-*"]
