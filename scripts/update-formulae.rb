@@ -56,12 +56,10 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       version "#{proxytop_version}"
       license "MIT"
 
-      on_arm do
+      if Hardware::CPU.arm?
         url "#{assets.fetch(arm_name)}"
         sha256 "#{arm_sha}"
-      end
-
-      on_intel do
+      else
         url "#{assets.fetch(intel_name)}"
         sha256 "#{intel_sha}"
       end
@@ -85,8 +83,8 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       desc "Local Web UI for managing Claude Code and Codex CLI connections"
       homepage "https://github.com/cliecy/cc-switch-ui"
       url "#{cc_url}"
-      sha256 "#{cc_sha}"
       version "#{cc_version}"
+      sha256 "#{cc_sha}"
       license "MIT"
 
       depends_on "python@3.12"
