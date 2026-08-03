@@ -4,11 +4,11 @@ class Proxytop < Formula
   license "MIT"
 
   if Hardware::CPU.arm?
-    url "https://github.com/cliecy/proxytop/releases/download/v1.1.1/proxytop-1.1.1-darwin-arm64.tar.gz"
-    sha256 "e789c91b4aaa10640e80e011a520d2322b0f58419d596cae6cbd24f23cfe6bfb"
+    url "https://github.com/cliecy/proxytop/releases/download/v1.1.1/proxytop-1.1.1-darwin-arm.tar.gz"
+    sha256 "9d6681f87220eee4c6ac22d0a033d519b460cf4f59aa2d3e7e494c8556cd6e5f"
   else
-    url "https://github.com/cliecy/proxytop/releases/download/v1.1.1/proxytop-1.1.1-darwin-x86_64.tar.gz"
-    sha256 "d95e910373a7e7c574dc079df8a79e46f10067e272dedf03e74db214dcb0cdb0"
+    url "https://github.com/cliecy/proxytop/releases/download/v1.1.1/proxytop-1.1.1-darwin-intel.tar.gz"
+    sha256 "b225ad1f2b8777f7a18a7eeedfb9385ccdb5f03566291f5c0f971344582091b7"
   end
 
   def install

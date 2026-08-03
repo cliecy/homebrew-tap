@@ -34,8 +34,8 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
   proxytop_version = version_from_tag(proxytop_tag)
   assets = proxytop_release.fetch("assets").to_h { |asset| [asset.fetch("name"), asset.fetch("browser_download_url")] }
 
-  arm_name = "proxytop-#{proxytop_version}-darwin-arm64.tar.gz"
-  intel_name = "proxytop-#{proxytop_version}-darwin-x86_64.tar.gz"
+  arm_name = "proxytop-#{proxytop_version}-darwin-arm.tar.gz"
+  intel_name = "proxytop-#{proxytop_version}-darwin-intel.tar.gz"
   abort "missing #{arm_name} in latest proxytop release" unless assets.key?(arm_name)
   abort "missing #{intel_name} in latest proxytop release" unless assets.key?(intel_name)
 
