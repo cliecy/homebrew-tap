@@ -145,6 +145,7 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       name "Proxytop"
       desc "macOS proxy, VPN, and per-application network path inspector"
       homepage "https://github.com/cliecy/proxytop"
+      depends_on macos: ">= :sonoma"
 
       app "Proxytop.app"
 
