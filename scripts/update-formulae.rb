@@ -141,8 +141,7 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       version "#{proxytop_version}"
       sha256 "#{dmg_sha}"
 
-      url "#{assets.fetch(dmg_name)}",
-          verified: "github.com/cliecy/proxytop/"
+      url "#{assets.fetch(dmg_name)}"
       name "Proxytop"
       desc "macOS proxy, VPN, and per-application network path inspector"
       homepage "https://github.com/cliecy/proxytop"
