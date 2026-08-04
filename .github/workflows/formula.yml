@@ -16,10 +16,14 @@ jobs:
       - uses: actions/checkout@v5
       - name: Register this checkout as the tap under test
         run: brew tap cliecy/tap "$GITHUB_WORKSPACE"
-      - name: Audit and style
+      - name: Audit and style formulae
         run: |
           brew audit --strict --new --online cliecy/tap/proxytop cliecy/tap/cc-switch-ui
           brew style --formula cliecy/tap/proxytop cliecy/tap/cc-switch-ui
+      - name: Audit and style cask
+        run: |
+          brew audit --cask --strict --online cliecy/tap/proxytop
+          brew style --cask cliecy/tap/proxytop
 
   test:
     runs-on: macos-14
@@ -35,3 +39,8 @@ jobs:
           brew test proxytop
           brew install --build-from-source cliecy/tap/cc-switch-ui
           brew test cc-switch-ui
+      - name: Install and verify cask
+        run: |
+          brew install --cask cliecy/tap/proxytop
+          test -d "/Applications/Proxytop.app"
+          test -x "/Applications/Proxytop.app/Contents/Resources/proxytop"

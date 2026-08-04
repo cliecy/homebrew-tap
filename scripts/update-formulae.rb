@@ -127,5 +127,36 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
     end
   RUBY
 
+  dmg_name = "Proxytop-#{proxytop_version}.dmg"
+  sha_name = "#{dmg_name}.sha256"
+  dmg_sha = if assets.key?(sha_name)
+    command("curl", "--fail", "--location", "--silent", "--show-error", assets.fetch(sha_name)).split.first
+  else
+    abort "missing #{dmg_name} in latest proxytop release" unless assets.key?(dmg_name)
+    download_sha(assets.fetch(dmg_name), directory, dmg_name)
+  end
+
+  File.write("Casks/proxytop.rb", <<~RUBY)
+    cask "proxytop" do
+      version "#{proxytop_version}"
+      sha256 "#{dmg_sha}"
+
+      url "#{assets.fetch(dmg_name)}",
+          verified: "github.com/cliecy/proxytop/"
+      name "Proxytop"
+      desc "macOS proxy, VPN, and per-application network path inspector"
+      homepage "https://github.com/cliecy/proxytop"
+
+      app "Proxytop.app"
+
+      uninstall quit: "com.proxytop.app"
+
+      zap trash: [
+        "~/Library/Application Support/Proxytop",
+        "~/.config/proxytop",
+      ]
+    end
+  RUBY
+
   puts "Updated proxytop #{proxytop_version} and cc-switch-ui #{cc_version}."
 end
