@@ -136,8 +136,8 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
     download_sha(assets.fetch(dmg_name), directory, dmg_name)
   end
 
-  File.write("Casks/proxytop.rb", <<~RUBY)
-    cask "proxytop" do
+  File.write("Casks/proxytop-app.rb", <<~RUBY)
+    cask "proxytop-app" do
       version "#{proxytop_version}"
       sha256 "#{dmg_sha}"
 

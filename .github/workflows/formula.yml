@@ -22,8 +22,8 @@ jobs:
           brew style --formula cliecy/tap/proxytop cliecy/tap/cc-switch-ui
       - name: Audit and style cask
         run: |
-          brew audit --cask --strict --online cliecy/tap/proxytop
-          brew style --cask cliecy/tap/proxytop
+          brew audit --cask --strict --online cliecy/tap/proxytop-app
+          brew style --cask cliecy/tap/proxytop-app
 
   test:
     runs-on: macos-14
@@ -41,6 +41,6 @@ jobs:
           brew test cc-switch-ui
       - name: Install and verify cask
         run: |
-          brew install --cask cliecy/tap/proxytop
+          brew install --cask cliecy/tap/proxytop-app
           test -d "/Applications/Proxytop.app"
           test -x "/Applications/Proxytop.app/Contents/Resources/proxytop"

@@ -23,7 +23,7 @@ brew install proxytop
 The Proxytop **menu bar app** is distributed as a cask:
 
 ```bash
-brew install --cask cliecy/tap/proxytop
+brew install --cask cliecy/tap/proxytop-app
 ```
 
 ## Packages
@@ -35,7 +35,7 @@ brew install --cask cliecy/tap/proxytop
 
 | Cask | Upstream | Description |
 | --- | --- | --- |
-| `proxytop` | [cliecy/proxytop](https://github.com/cliecy/proxytop) | macOS menu bar proxy / VPN / network path inspector |
+| `proxytop-app` | [cliecy/proxytop](https://github.com/cliecy/proxytop) | macOS menu bar proxy / VPN / network path inspector |
 
 Formulae and casks use immutable upstream releases and are updated by pull
 request. A package is only added after it has a versioned upstream release, a
