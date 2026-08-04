@@ -143,17 +143,18 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
 
       url "#{assets.fetch(dmg_name)}"
       name "Proxytop"
-      desc "macOS proxy, VPN, and per-application network path inspector"
+      desc "Proxy, VPN, and per-application network path inspector"
       homepage "https://github.com/cliecy/proxytop"
-      depends_on macos: ">= :sonoma"
+
+      depends_on macos: :sonoma
 
       app "Proxytop.app"
 
       uninstall quit: "com.proxytop.app"
 
       zap trash: [
-        "~/Library/Application Support/Proxytop",
         "~/.config/proxytop",
+        "~/Library/Application Support/Proxytop",
       ]
     end
   RUBY
