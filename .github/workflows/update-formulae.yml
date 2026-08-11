@@ -19,6 +19,8 @@ jobs:
       - name: Check Homebrew
         run: brew --version
       - name: Update formula metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: ruby scripts/update-formulae.rb
       - name: Create update pull request
         env:
