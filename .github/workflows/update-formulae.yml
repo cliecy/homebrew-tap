@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
       - name: Check Homebrew
         run: brew --version
+      - name: Register checkout as tap for Python resource updates
+        run: brew tap cliecy/tap "$GITHUB_WORKSPACE"
       - name: Update formula metadata
         run: ruby scripts/update-formulae.rb
       - name: Create update pull request

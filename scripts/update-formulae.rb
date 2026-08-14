@@ -4,6 +4,7 @@ require "digest"
 require "fileutils"
 require "json"
 require "open3"
+require "rubygems"
 require "tmpdir"
 
 def command(*args)
@@ -24,7 +25,7 @@ end
 
 def version_from_tag(tag)
   version = tag.delete_prefix("v")
-  abort "unsupported upstream tag: #{tag}" unless version.match?(/\A\d+\.\d+\.\d+(?:[-+.]\w[\w.-]*)?\z/)
+  abort "unsupported upstream tag: #{tag}" unless version.match?(/\A\d+\.\d+\.\d+\z/)
   version
 end
 
@@ -40,9 +41,13 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
   arm_sha = download_sha(assets.fetch(arm_name), directory, arm_name)
 
   cc_tags = github_json("repos/cliecy/cc-switch-ui/tags?per_page=100")
-  cc_tag = cc_tags.filter_map { |entry| entry["name"] }.find { |tag| tag.match?(/\Av\d+\.\d+\.\d+/) }
-  abort "no semantic cc-switch-ui tag found" unless cc_tag
-  cc_version = version_from_tag(cc_tag)
+  cc_versions = cc_tags.filter_map do |entry|
+    match = entry["name"].match(/\Av(\d+\.\d+\.\d+)\z/)
+    match && match[1]
+  end
+  abort "no stable cc-switch-ui release tag found" if cc_versions.empty?
+  cc_version = cc_versions.max_by { |version| Gem::Version.new(version) }
+  cc_tag = "v#{cc_version}"
   cc_url = "https://github.com/cliecy/cc-switch-ui/archive/refs/tags/#{cc_tag}.tar.gz"
   cc_sha = download_sha(cc_url, directory, "cc-switch-ui-#{cc_version}.tar.gz")
 
@@ -67,7 +72,10 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
     end
   RUBY
 
-  File.write("Formula/cc-switch-ui.rb", <<~RUBY)
+  cc_formula_path = "Formula/cc-switch-ui.rb"
+  previous_cc_content = File.read(cc_formula_path) if File.exist?(cc_formula_path)
+
+  File.write(cc_formula_path, <<~RUBY)
     class CcSwitchUi < Formula
       include Language::Python::Virtualenv
 
@@ -126,6 +134,10 @@ Dir.mktmpdir("homebrew-tap-update") do |directory|
       end
     end
   RUBY
+
+  if previous_cc_content.nil? || !previous_cc_content.include?("/archive/refs/tags/#{cc_tag}.tar.gz")
+    command("brew", "update-python-resources", "cliecy/tap/cc-switch-ui")
+  end
 
   dmg_name = "Proxytop-#{proxytop_version}.dmg"
   sha_name = "#{dmg_name}.sha256"
