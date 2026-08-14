@@ -42,7 +42,8 @@ request. A package is only added after it has a versioned upstream release, a
 clean installation path, and a meaningful Homebrew test.
 
 > **Note:** the app cask is currently unsigned, so Gatekeeper blocks the first
-> launch of a downloaded build. Open it once with right-click → Open, or run:
+> launch of a downloaded build, and it requires macOS 14 (Sonoma) or newer.
+> Open it once with right-click → Open, or run:
 > `xattr -dr com.apple.quarantine "/Applications/Proxytop.app"`
 
 ## Maintenance
