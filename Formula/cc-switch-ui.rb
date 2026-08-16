@@ -3,8 +3,8 @@ class CcSwitchUi < Formula
 
   desc "Local Web UI for managing Claude Code and Codex CLI connections"
   homepage "https://github.com/cliecy/cc-switch-ui"
-  url "https://github.com/cliecy/cc-switch-ui/archive/refs/tags/v0.5.0.tar.gz"
-  sha256 "81ca8c90f07df49611e93a63afd3522a14633795f6b1e31b6d0194b904d52b41"
+  url "https://github.com/cliecy/cc-switch-ui/archive/refs/tags/v0.5.1.tar.gz"
+  sha256 "b46c6efd3653a235070f4c0dcbfaf456ca9656fce92adfcbefe6f8bc39e6e4bd"
   license "MIT"
 
   depends_on "python@3.13"
