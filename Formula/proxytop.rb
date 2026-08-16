@@ -1,8 +1,8 @@
 class Proxytop < Formula
   desc "macOS proxy, VPN, tunnel, and process traffic inspector"
   homepage "https://github.com/cliecy/proxytop"
-  url "https://github.com/cliecy/proxytop/releases/download/v1.4.0/proxytop-1.4.0-darwin-arm.tar.gz"
-  sha256 "08b7007f30ba0e0bb8e43a6806ab4fc97f038138a3be7d51ef657d4a2b11fbe5"
+  url "https://github.com/cliecy/proxytop/releases/download/v1.4.1/proxytop-1.4.1-darwin-arm.tar.gz"
+  sha256 "2e89f91df4a6f500bf6c744801c2ba3c888d126d084b1e5c506a8174c8bf725a"
   license "MIT"
   depends_on arch: :arm64
 

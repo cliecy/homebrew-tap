@@ -1,6 +1,6 @@
 cask "proxytop-app" do
-  version "1.4.0"
-  sha256 "41fd8b20755dd552fa0545b4bb07167a8e97bfdec4db40f7a9db8e86d7afbd0b"
+  version "1.4.1"
+  sha256 "2e656b9607d604d75713f205c4fae96639fea05e3c827edaed13315a90e13d9a"
 
   url "https://github.com/cliecy/proxytop/releases/download/v#{version}/Proxytop-#{version}.dmg"
   name "Proxytop"
